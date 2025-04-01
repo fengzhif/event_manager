@@ -35,7 +35,7 @@ public class Md5Util {
      *
      * @param password  要校验的字符串
      * @param md5PwdStr 已知的md5校验码
-     * @return
+     * @return True Or False
      */
     public static boolean checkPassword(String password, String md5PwdStr) {
         String s = getMD5String(password);

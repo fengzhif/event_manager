@@ -4,3 +4,8 @@ spring:
     url: jdbc:mysql://localhost:3306/event_manager
     username: root
     password: root
+
+#Java驼峰命名与Mysql的下划线命名之间的转换
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
