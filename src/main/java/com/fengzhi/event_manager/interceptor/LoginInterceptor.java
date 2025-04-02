@@ -15,14 +15,11 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws Exception {
         String token = request.getHeader("Authorization");
-        System.out.println(token);
-        try{
-            Map<String,Object> claim= JwtUtil.parseToken(token);
-            System.out.println(claim);
+        try {
+            Map<String, Object> claim = JwtUtil.parseToken(token);
             ThreadLocalUtil.set(claim);
             return true;
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             response.setStatus(401);
             return false;
         }
