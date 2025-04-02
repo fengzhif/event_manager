@@ -7,6 +7,8 @@ import com.fengzhi.event_manager.utils.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class UserServiceImpl implements UserService {
     UserMapper mapper;
@@ -25,5 +27,21 @@ public class UserServiceImpl implements UserService {
         String md5String = Md5Util.getMD5String(password);
 
         mapper.add(username,md5String);
+    }
+
+    @Override
+    public void update(User user) {
+        user.setUpdateTime(LocalDateTime.now());
+        mapper.update(user);
+    }
+
+    @Override
+    public void updateAvatar(Integer id, String avatarUrl) {
+        mapper.updateAvatar(id,avatarUrl);
+    }
+
+    @Override
+    public void updatePwd(Integer id, String newPassword) {
+        mapper.updatePwd(id,newPassword);
     }
 }
