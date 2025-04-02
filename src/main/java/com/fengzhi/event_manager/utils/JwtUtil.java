@@ -39,13 +39,11 @@ public class JwtUtil {
      * @return 解析后的 DecodedJWT 对象
      */
     public static Map<String, Object> parseToken(String token) {
-        var claim=JWT.require(ALGORITHM)
+        return JWT.require(ALGORITHM)
                 .build()
                 .verify(token)
                 .getClaim("claims")
                 .asMap();
-        System.out.println(claim);
-        return claim;
     }
 
     /**

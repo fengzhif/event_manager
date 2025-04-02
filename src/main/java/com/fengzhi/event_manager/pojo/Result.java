@@ -12,14 +12,15 @@ public class Result<T> {
     private String msg;//提示信息
     private T data;//响应数据
 
-    public static  <T> Result<T> success(T data){
-        return new Result<T>(1,"success",data);
+    public static <T> Result<T> success(T data) {
+        return new Result<T>(0, "success", data);
     }
-    public static Result success(){
+
+    public static Result success() {
         return new Result(0, "success", null);
     }
 
-    public static Result error(String msg){
-        return new Result(0, "error",msg);
+    public static Result error(String msg) {
+        return new Result(1, "error", msg);
     }
 }
