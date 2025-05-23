@@ -22,6 +22,10 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws Exception {
         String token = request.getHeader("Authorization");
+        String uri = request.getRequestURI();
+        if (uri.startsWith("/images/")) {
+            return true; // 放行图片请求
+        }
         try {
             Map<String, Object> claim = JwtUtil.parseToken(token);
             String redisToken = stringRedisTemplate.opsForValue().get(token);

@@ -8,9 +8,20 @@ spring:
     redis:
       host: localhost
       port: 6379
+  #设置文件上传大小
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
 
 #Java驼峰命名与Mysql的下划线命名之间的转换
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+
+#将上传的图片存储到本地文件夹下，用于静态资源映射
+file:
+  upload-path: D:/tmp_project/vue_learn/image_store_for_eventManager/
+
+

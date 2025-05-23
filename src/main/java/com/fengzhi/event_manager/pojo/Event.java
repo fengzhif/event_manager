@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.groups.Default;
 import lombok.Data;
-import org.hibernate.validator.constraints.URL;
 
 import java.time.LocalDateTime;
 
@@ -21,7 +20,7 @@ public class Event {
     private String title;
     @NotEmpty
     private String content;
-    @URL
+//    @URL
     private String coverImg;
     @State
     private String state;
