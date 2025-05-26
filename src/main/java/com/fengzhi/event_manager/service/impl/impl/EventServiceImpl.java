@@ -10,6 +10,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public PageBean<Event> getEventList(Integer pageNum, Integer pageSize, Integer categoryId, String state) {
+    public PageBean<Event> getEventList(Integer pageNum, Integer pageSize, Integer categoryId, String state, String startDate, String endDate) {
         //新建一个pagebean
         PageBean<Event> pageBean = new PageBean<>();
         //启动pagehelper
@@ -42,15 +43,17 @@ public class EventServiceImpl implements EventService {
         String role = (String) map.get("role");
         //查询事件类别
         List<Event> eventList;
+        LocalDate start = (startDate != null && !startDate.isEmpty()) ? LocalDate.parse(startDate) : null;
+        LocalDate end = (endDate != null && !endDate.isEmpty()) ? LocalDate.parse(endDate) : null;
         if(role.equals("ADMIN")){
-            eventList=eventMapper.getAllEventList(categoryId,state);
+            eventList=eventMapper.getAllEventList(categoryId,state, start, end);
         }
         else{
-            eventList=eventMapper.getEventList(createUser,categoryId,state);
+            eventList=eventMapper.getEventList(createUser,categoryId,state, start, end);
         }
         //强转成page类型来获取pagebean所需数据
         Page<Event> eventPage=(Page<Event>)eventList;
-        pageBean.setTotal(eventPage.getPages());
+        pageBean.setTotal((int) eventPage.getTotal());
         pageBean.setItems(eventPage.getResult());
         return pageBean;
     }

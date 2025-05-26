@@ -30,8 +30,10 @@ public class EventController {
     public Result<PageBean<Event>> getEventList(Integer pageNum,
                                                 Integer pageSize,
                                                 @RequestParam(required = false) Integer categoryId,
-                                                @RequestParam(required = false) String state ) {
-        PageBean<Event> pb=eventService.getEventList(pageNum,pageSize,categoryId,state);
+                                                @RequestParam(required = false) String state,
+                                                @RequestParam(required = false) String startDate,
+                                                @RequestParam(required = false) String endDate) {
+        PageBean<Event> pb=eventService.getEventList(pageNum,pageSize,categoryId,state,startDate,endDate);
         return Result.success(pb);
     }
 

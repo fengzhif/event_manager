@@ -12,6 +12,12 @@
             <if test="state!=null">
                 and state=#{state}
             </if>
+            <if test="startDate != null">
+                and event_date &gt;= #{startDate}
+            </if>
+            <if test="endDate != null">
+                and event_date &lt;= #{endDate}
+            </if>
             and create_user=#{id}
         </where>
     </select>
@@ -24,6 +30,12 @@
             </if>
             <if test="state!=null">
                 and state=#{state}
+            </if>
+            <if test="startDate != null">
+                and event_date &gt;= #{startDate}
+            </if>
+            <if test="endDate != null">
+                and event_date &lt;= #{endDate}
             </if>
         </where>
     </select>
