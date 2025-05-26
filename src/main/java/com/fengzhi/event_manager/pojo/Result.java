@@ -21,6 +21,6 @@ public class Result<T> {
     }
 
     public static Result error(String msg) {
-        return new Result(1, "error", msg);
+        return new Result(1, msg, null);
     }
 }

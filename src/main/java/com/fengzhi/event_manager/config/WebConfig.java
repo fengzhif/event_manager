@@ -4,7 +4,6 @@ import com.fengzhi.event_manager.interceptor.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
@@ -24,11 +23,11 @@ public class WebConfig implements WebMvcConfigurer {
         //放行登录和注册接口
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // 将 /images/** 映射到本地图片文件夹
-        registry.addResourceHandler("/images/**")
-                .addResourceLocations("file:D:/tmp_project/vue_learn/image_store_for_eventManager/");
-    }
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        // 将 /images/** 映射到本地图片文件夹
+//        registry.addResourceHandler("/images/**")
+//                .addResourceLocations("file:D:/tmp_project/vue_learn/image_store_for_eventManager/");
+//    }
 
 }
