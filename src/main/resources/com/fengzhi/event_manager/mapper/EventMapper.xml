@@ -15,4 +15,16 @@
             and create_user=#{id}
         </where>
     </select>
+
+    <select id="getAllEventList" resultType="com.fengzhi.event_manager.pojo.Event">
+        select  * from event
+        <where>
+            <if test="categoryId!=null">
+                category_id=#{categoryId}
+            </if>
+            <if test="state!=null">
+                and state=#{state}
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -11,9 +11,9 @@ public interface UserMapper {
     @Select("select * from user where username=#{username}")
     User findByName(String username);
 
-    @Insert("insert into user (username,password,create_time,update_time) " +
-            " values (#{username},#{password},now(),now())")
-    void add(String username, String password);
+    @Insert("insert into user (username,password,create_time,update_time,role) " +
+            " values (#{username},#{password},now(),now(),#{role})")
+    void add(String username, String password, String role);
 
     @Update("update user set email=#{email},nickname=#{nickname},update_time=#{updateTime} where id=#{id}")
     void update(User user);

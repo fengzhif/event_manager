@@ -13,6 +13,7 @@ public interface EventMapper {
 
     //动态SQL
     List<Event> getEventList(Integer id, Integer categoryId, String state);
+    List<Event> getAllEventList(Integer categoryId, String state);
 
     @Select("select * from event where id=#{id}")
     Event findEventById(Integer id);

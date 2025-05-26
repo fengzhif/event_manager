@@ -34,8 +34,13 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> getCategoryList() {
         Map<String, Object> claims = ThreadLocalUtil.get();
         Integer createUserId = (Integer) claims.get("id");
+        String userRole = (String) claims.get("role");
+        if(userRole.equals("ADMIN")){
+            return categoryMapper.getAllCategoryList();
+        }
         return categoryMapper.getCategoryList(createUserId);
     }
+
 
     @Override
     public Category getDetail(Integer id) {

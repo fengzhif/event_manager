@@ -53,6 +53,7 @@ public class UserController {
                 Map<String, Object> claims = new HashMap<>();
                 claims.put("username", username);
                 claims.put("id", user.getId());
+                claims.put("role", user.getRole().name());
                 String token = JwtUtil.generateToken(claims);
                 //token存入Redis
                 stringRedisTemplate.opsForValue().set(token, token,1, TimeUnit.HOURS);

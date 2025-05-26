@@ -28,4 +28,6 @@ public class User {
     private LocalDateTime createTime;
     @JsonFormat(pattern = "yyyy:MM:dd HH:mm:ss")
     private LocalDateTime updateTime;
+    @NotNull
+    private UserRole role; // Mybatis处理枚举 默认存储枚举字符串，如 "USER", "ADMIN"
 }

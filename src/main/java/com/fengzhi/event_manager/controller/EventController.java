@@ -39,8 +39,13 @@ public class EventController {
     public Result<Event> getEventDetail(Integer id) {
         Map<String,Object> map= ThreadLocalUtil.get();
         Integer userId=(Integer) map.get("id");
+        String userRole=(String) map.get("role");
         Event event=eventService.findEventById(id);
-        if(!userId.equals(event.getCreateUser())){
+        //管理员可以查看所有事件
+        if(userRole.equals("ADMIN")){
+            return Result.success(event);
+        }
+        else if(!userId.equals(event.getCreateUser())){
             return Result.error("仅可查看自己创建的事件");
         }
         return Result.success(event);

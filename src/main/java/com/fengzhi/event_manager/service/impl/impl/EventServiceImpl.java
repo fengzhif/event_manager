@@ -39,8 +39,15 @@ public class EventServiceImpl implements EventService {
         PageHelper.startPage(pageNum, pageSize);
         Map<String, Object> map = ThreadLocalUtil.get();
         Integer createUser = (Integer) map.get("id");
+        String role = (String) map.get("role");
         //查询事件类别
-        List<Event> eventList=eventMapper.getEventList(createUser,categoryId,state);
+        List<Event> eventList;
+        if(role.equals("ADMIN")){
+            eventList=eventMapper.getAllEventList(categoryId,state);
+        }
+        else{
+            eventList=eventMapper.getEventList(createUser,categoryId,state);
+        }
         //强转成page类型来获取pagebean所需数据
         Page<Event> eventPage=(Page<Event>)eventList;
         pageBean.setTotal(eventPage.getPages());
