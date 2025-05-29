@@ -19,8 +19,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor)
-                .excludePathPatterns("/user/login", "/user/register");
-        //放行登录和注册接口
+                .excludePathPatterns("/user/login", "/user/register", "/user/forgotPassword", "/user/resetPassword");
+        //放行登录和注册接口 忘记密码和重置密码接口
     }
 
 //    @Override

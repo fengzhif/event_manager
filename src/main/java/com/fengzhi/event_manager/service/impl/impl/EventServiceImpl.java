@@ -45,7 +45,7 @@ public class EventServiceImpl implements EventService {
         List<Event> eventList;
         LocalDate start = (startDate != null && !startDate.isEmpty()) ? LocalDate.parse(startDate) : null;
         LocalDate end = (endDate != null && !endDate.isEmpty()) ? LocalDate.parse(endDate) : null;
-        if(role.equals("ADMIN")){
+        if(role.equals("ADMIN")||role.equals("SUPER")){
             eventList=eventMapper.getAllEventList(categoryId,state, start, end);
         }
         else{

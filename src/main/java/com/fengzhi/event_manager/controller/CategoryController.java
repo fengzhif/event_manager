@@ -44,10 +44,11 @@ public class CategoryController {
     public Result updateCategory(@RequestBody @Validated(Category.Update.class) Category category) {
         Map<String, Object> claims = ThreadLocalUtil.get();
         Integer updateUserId = (Integer) claims.get("id");
+        String userRole=(String) claims.get("role");
         Integer id = category.getId();
         Category old_ca = categoryService.findCategoryById(id);
         Integer createUserId = old_ca.getCreateUser();
-        if (!createUserId.equals(updateUserId)) {
+        if (!createUserId.equals(updateUserId) && !userRole.equals("SUPER")) {
             return Result.error("只有分类创建者可修改分类信息");
         }
         categoryService.updateCategory(category);
@@ -58,9 +59,10 @@ public class CategoryController {
     public Result deleteCategory(@RequestParam("id") Integer id) {
         Map<String, Object> claims = ThreadLocalUtil.get();
         Integer updateUserId = (Integer) claims.get("id");
+        String userRole=(String) claims.get("role");
         Category old_ca = categoryService.findCategoryById(id);
         Integer createUserId = old_ca.getCreateUser();
-        if (!createUserId.equals(updateUserId)) {
+        if (!createUserId.equals(updateUserId) && !userRole.equals("SUPER")) {
             return Result.error("只有分类创建者可删除分类信息");
         }
         categoryService.deleteCategory(id);

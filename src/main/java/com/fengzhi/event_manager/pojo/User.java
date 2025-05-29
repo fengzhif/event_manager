@@ -29,5 +29,11 @@ public class User {
     @JsonFormat(pattern = "yyyy:MM:dd HH:mm:ss")
     private LocalDateTime updateTime;
     @NotNull
-    private UserRole role; // Mybatis处理枚举 默认存储枚举字符串，如 "USER", "ADMIN"
+    private UserRole role; // Mybatis处理枚举 默认存储枚举字符串，如 "USER", "ADMIN", "SUPER"
+
+    @JsonIgnore
+    private String resetPasswordToken;
+    @JsonIgnore
+    @JsonFormat(pattern = "yyyy:MM:dd HH:mm:ss")
+    private LocalDateTime resetPasswordExpireTime;
 }

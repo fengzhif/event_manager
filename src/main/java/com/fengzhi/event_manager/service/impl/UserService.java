@@ -13,4 +13,6 @@ public interface UserService {
     void updateAvatar(Integer id, @URL String avatarUrl);
 
     void updatePwd(Integer id, String md5String);
+
+
 }

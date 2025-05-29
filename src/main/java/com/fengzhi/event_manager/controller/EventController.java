@@ -44,7 +44,7 @@ public class EventController {
         String userRole=(String) map.get("role");
         Event event=eventService.findEventById(id);
         //管理员可以查看所有事件
-        if(userRole.equals("ADMIN")){
+        if(userRole.equals("ADMIN") || userRole.equals("SUPER")){
             return Result.success(event);
         }
         else if(!userId.equals(event.getCreateUser())){
@@ -57,9 +57,10 @@ public class EventController {
     public Result updateEvent(@Validated(Event.Update.class) @RequestBody Event event) {
         Map<String,Object> map= ThreadLocalUtil.get();
         Integer userId=(Integer) map.get("id");
+        String userRole=(String) map.get("role");
         Integer id=event.getId();
         Integer createUserId= eventService.findEventById(id).getCreateUser();
-        if(!userId.equals(createUserId)){
+        if(!userId.equals(createUserId) && !userRole.equals("SUPER")){
             return Result.error("只有事件创建者可以修改事件信息");
         }
         eventService.updateEvent(event);
@@ -70,8 +71,9 @@ public class EventController {
     public Result deleteEvent(Integer id) {
         Map<String,Object> map= ThreadLocalUtil.get();
         Integer userId=(Integer) map.get("id");
+        String userRole=(String) map.get("role");
         Integer createUserId= eventService.findEventById(id).getCreateUser();
-        if(!userId.equals(createUserId)){
+        if(!userId.equals(createUserId) && !userRole.equals("SUPER")){
             return Result.error("只有事件创建者可以删除事件信息");
         }
         eventService.deleteEvent(id);
