@@ -26,6 +26,17 @@ spring:
           ssl:
             enable: true
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include:  "*"
+  metrics:
+    web:
+      server:
+        request:
+          autotime:
+            enabled: true
 
 #Java驼峰命名与Mysql的下划线命名之间的转换
 mybatis:
